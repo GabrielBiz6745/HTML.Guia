@@ -1,0 +1,132 @@
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Hierarquia do HTML<title>Hierarquia do HTML</title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .element {
+            background: #ffffff;
+            border: 2px solid #007BFF;
+            padding: 10px;
+            margin: 5px;
+            width: 200px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .content {
+            display: none;
+            margin-left: 20px;
+        }
+        .toggle-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 2px 5px;
+            cursor: pointer;
+        }
+        .tooltip {
+            visibility: hidden;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+            width: 180px;
+            pointer-events: none;
+        }
+		.element:hover:not(:has(.element:hover)) > .tooltip {
+			visibility: visible;
+            opacity: 1;
+		}
+    </style>
+<script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
+<body>
+    <div class="element">HTML <button class="toggle-btn"><i class="fa-solid fa-maximize"></i></button>
+        <span class="tooltip">Elemento raiz do documento HTML</span>
+        <div class="content" style="display: none;">
+            <div class="element">HEAD <button class="toggle-btn"><i class="fa-solid fa-maximize"></i></button>
+                <span class="tooltip">Cabeçalho do documento</span>
+                <div class="content" style="display: none;">
+                    <div class="element">meta <span class="tooltip">Metadados do documento</span></div>
+                    <div class="element">link <span class="tooltip">Links para recursos externos</span></div>
+                    <div class="element">title <span class="tooltip">Título da página</span></div>
+                    <div class="element">style <span class="tooltip">Estilos CSS internos</span></div>
+                </div>
+            </div>
+            <div class="element">BODY <button class="toggle-btn"><i class="fa-solid fa-maximize"></i></button>
+                <span class="tooltip">Corpo do documento</span>
+                <div class="content" style="display: none;">
+                    <div class="element">div <button class="toggle-btn"><i class="fa-solid fa-maximize"></i></button>
+                        <span class="tooltip">Bloco de conteúdo</span>
+                        <div class="content">
+                            <div class="element">h2 <span class="tooltip">Título de nível 2</span></div>
+                            <div class="element">ul <button class="toggle-btn"><i class="fa-solid fa-maximize"></i></button>
+                                <span class="tooltip">Lista não ordenada</span>
+                                <div class="content">
+                                    <div class="element">li <span class="tooltip">Item de lista</span></div>
+                                    <div class="element">li <span class="tooltip">Item de lista</span></div>
+                                    <div class="element">li <span class="tooltip">Item de lista</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="element">div <button class="toggle-btn"><i class="fa-solid fa-maximize"></i></button>
+                        <span class="tooltip">Outro bloco de conteúdo</span>
+                        <div class="content">
+                            <div class="element">h2 <span class="tooltip">Título de nível 2</span></div>
+                            <div class="element">p <span class="tooltip">Parágrafo de texto</span></div>
+                            <div class="element">p <span class="tooltip">Parágrafo de texto</span></div>
+                        </div>
+                    </div>
+                    <div class="element">div <button class="toggle-btn"><i class="fa-solid fa-maximize"></i></button>
+                        <span class="tooltip">Outro bloco de conteúdo</span>
+                        <div class="content">
+                            <div class="element">h2 <span class="tooltip">Título de nível 2</span></div>
+                            <div class="element">p <button class="toggle-btn"><i class="fa-solid fa-maximize"></i></button>
+                                <span class="tooltip">Parágrafo com elementos aninhados</span>
+                                <div class="content">
+                                    <div class="element">a <span class="tooltip">Link para outra página</span></div>
+                                    <div class="element">button <span class="tooltip">Botão interativo</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="element">script <span class="tooltip">Script JavaScript</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                let content = this.parentElement.querySelector('.content');
+                if (content) {
+                    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                    this.innerHTML = content.style.display === 'block' ? '<i class="fa-solid fa-down-left-and-up-right-to-center"></i>' : '<i class="fa-solid fa-maximize"></i>';
+                }
+            });
+        });
+    </script>
+
+
+</body></html>
